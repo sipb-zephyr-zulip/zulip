@@ -1189,7 +1189,9 @@ class Realm(models.Model):  # type: ignore[django-manager-missing] # django-stub
 
     @property
     def is_zephyr_mirror_realm(self) -> bool:
-        return self.string_id == "zephyr"
+        # zephyr-zulip.mit.edu is the host, and so "" is our zephyr realm.
+        # but keep "zephyr" around for tests
+        return self.string_id == "" or self.string_id == "zephyr"
 
     @property
     def webathena_enabled(self) -> bool:
