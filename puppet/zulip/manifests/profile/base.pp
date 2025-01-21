@@ -5,6 +5,12 @@
 class zulip::profile::base {
   include zulip::timesync
   include zulip::common
+
+  package { 'python':
+    ensure => present,
+    name   => 'python3',
+  }
+
   case $facts['os']['family'] {
     'Debian': {
       include zulip::apt_repository
@@ -20,7 +26,6 @@ class zulip::profile::base {
     'Debian': {
       $base_packages = [
         # Basics
-        'python3',
         'python3-yaml',
         'puppet',
         'git',
